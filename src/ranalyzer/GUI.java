@@ -1334,20 +1334,6 @@ public class GUI extends javax.swing.JFrame {
     public void showCreateProjectDescriptionWindow(){
         this.projectDescriptionWindow.setEnabled(true);
         this.projectDescriptionWindow.setVisible(true);
-//        int returnVal = this.projectCreator.showSaveDialog(this);
-//        
-//        if(returnVal == JFileChooser.APPROVE_OPTION){
-//            
-//            projectName = new String(projectCreator.getSelectedFile()+".ran");
-//            
-//            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//            Date date = new Date();
-//            
-//            project = new Project("01",projectName,"privat",dateFormat.format(date));
-//            project.create(project, projectName);
-//            
-//            changeEnable(true);
-//        }
     }
     
     public void showOpenProjectDescriptionWindow(){
