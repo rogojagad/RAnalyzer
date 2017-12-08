@@ -23,6 +23,8 @@ public class DocumentController {
     private JFileChooser fileExplorer;
     private JDialog openDocLoadingDialog;
     private JProgressBar loadingBar;
+    private JDialog progressInformation;
+    private JProgressBar progressBar;
     
     public DocumentController(){
         
@@ -69,20 +71,49 @@ public class DocumentController {
         }
     }
     
-    public void loadUseCaseDescriptionForm(){
-        this.gui.showUseCaseDescriptionForm();
+    public void loadUseCaseDescriptionForm(String docName, JLabel label, JDialog descriptionWindow){
+        label.setText("Description for use case : " + docName);
+        descriptionWindow.setEnabled(true);
+        descriptionWindow.setVisible(true);
     }
     
-    public void submitUseCaseDescription(String description){
-        this.gui.saveUseCaseDescription(description);
+    public void submitUseCaseDescription(String description, JList<String> docList, JDialog progressInformation, JProgressBar progressBar){
+        this.progressInformation = progressInformation;
+        this.progressBar = progressBar;
+        
+        for(final RequirementDocument i: this.gui.project.docList){
+            if(i.Nama_document.equals(docList.getSelectedValue())){
+                i.addDeskripsi(description);
+                break;
+            }
+        }
+        ProgressTask countTask = new ProgressTask();
+        countTask.start();
+        
+        this.progressInformation.setEnabled(true);
+        this.progressInformation.setVisible(true);
+        this.progressBar.setEnabled(true);
+        this.progressBar.setVisible(true);
+//        this.gui.saveUseCaseDescription(description);
     }
     
-    public void showDeleteConfirmation(String name){
-        this.gui.showConfirmDocumentDelete(name);
+    public void showDeleteConfirmation(String name, JLabel msg, JDialog deleteDocConfirm){
+        msg.setText("Are you sure want to delete document " + name + " ?");
+        deleteDocConfirm.setEnabled(true);
+        deleteDocConfirm.setVisible(true);
     }
     
-    public void deleteDocument(String name){
-        this.gui.deleteSelectedDocument(name);
+    public void deleteDocument(String name, int index){
+        for(final RequirementDocument i: this.gui.project.docList){
+            if(i.Nama_document.equals(name)){
+                this.gui.project.docList.remove(i);
+                break;
+            }
+        }
+        
+        if(index != -1){
+            this.gui.model.remove(index);
+        }
     }
     
     private class Task extends Thread{
@@ -106,6 +137,37 @@ public class DocumentController {
             
             dismissLoadingDialog();
         }
+    }
+    
+    private class ProgressTask extends Thread{
+        public ProgressTask(){
+            
+        }
+        
+        public void run(){
+            for(int i = 0; i <= 100; i++){
+                final int progress = i;
+                
+                SwingUtilities.invokeLater(new Runnable(){
+                    public void run(){
+                        progressBar.setValue(progress);
+                    }
+                });
+                try {
+                    Thread.sleep(5);
+                 } catch (InterruptedException e) {}
+            }
+            
+            dismissProgressDialog();
+        }
+    }
+    
+    public void dismissProgressDialog(){
+        this.progressBar.setEnabled(false);
+        this.progressBar.setVisible(false);
+        
+        this.progressInformation.setEnabled(false);
+        this.progressInformation.setVisible(false);
     }
     
     public void dismissLoadingDialog(){

@@ -57,6 +57,25 @@ public class StatementController {
         
     }
     
+    public void deleteStatementConfirmation(String statName, JLabel confirmDeleteMsg, JDialog confirmationWindow){
+        confirmDeleteMsg.setText("Are you sure want to delete statement " + statName + " ?");
+        confirmationWindow.setVisible(true);
+        confirmationWindow.setEnabled(true);
+    }
+    
+    public void deleteSelectedStatement(String statName, int index){
+        for(final Statement i: this.gui.project.statementList){
+            if(i.Nama_statement.equals(statName)){
+                this.gui.project.statementList.remove(i);
+                break;
+            }
+        }
+        
+        if(index != -1){
+            this.gui.statementLstModel.remove(index);
+        }
+    }
+    
     public void editStatement(String name, String content, JTextField statName, JTextArea statContent){
         this.editStatementNameTxt = statName;
         this.editStatementContentTxt = statContent;

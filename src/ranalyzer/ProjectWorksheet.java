@@ -827,7 +827,7 @@ public class ProjectWorksheet extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void openProjectItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openProjectItemActionPerformed
-        this.existingProjectController.showProjectDescriptionWindow();
+        this.existingProjectController.showProjectDescriptionWindow(this.projectOpener);
     }//GEN-LAST:event_openProjectItemActionPerformed
 
     private void projectOpenerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectOpenerActionPerformed
@@ -835,7 +835,7 @@ public class ProjectWorksheet extends javax.swing.JFrame {
     }//GEN-LAST:event_projectOpenerActionPerformed
 
     private void createNewProjectMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewProjectMenuItemActionPerformed
-        this.projectController.showProjectDescriptionWindow();
+        this.projectController.showProjectDescriptionWindow(this.projectDescriptionWindow);
     }//GEN-LAST:event_createNewProjectMenuItemActionPerformed
 
     private void saveProjectMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProjectMenuItemActionPerformed
@@ -856,7 +856,13 @@ public class ProjectWorksheet extends javax.swing.JFrame {
     private void deleteDocYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDocYesActionPerformed
         String fileName = this.docList.getSelectedValue();
         
-        this.documentController.deleteDocument(fileName);
+        int index = this.docList.getSelectedIndex();
+        
+        this.documentController.deleteDocument(fileName, index);
+        
+        this.documentContent.setText("");
+        this.deleteDocConfirmation.setEnabled(false);
+        this.deleteDocConfirmation.setVisible(false);
         
     }//GEN-LAST:event_deleteDocYesActionPerformed
 
@@ -883,7 +889,7 @@ public class ProjectWorksheet extends javax.swing.JFrame {
     private void deleteDocumentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDocumentBtnActionPerformed
         String fileName = this.docList.getSelectedValue();
         
-        this.documentController.showDeleteConfirmation(fileName);
+        this.documentController.showDeleteConfirmation(fileName, this.confirmMessage, this.deleteDocConfirmation);
     }//GEN-LAST:event_deleteDocumentBtnActionPerformed
 
     private void loadingBarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_loadingBarPropertyChange
@@ -892,16 +898,18 @@ public class ProjectWorksheet extends javax.swing.JFrame {
 
     private void addDescriptionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDescriptionButtonActionPerformed
 
-        this.documentController.loadUseCaseDescriptionForm();
+        this.documentController.loadUseCaseDescriptionForm(this.docList.getSelectedValue(), this.useCaseDescriptionLabel, this.documentDescriptionWindow);
         
     }//GEN-LAST:event_addDescriptionButtonActionPerformed
 
     private void submitDocumentDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitDocumentDescriptionActionPerformed
         String desc = this.useCaseDescriptionContent.getText();
         
-        this.documentController.submitUseCaseDescription(desc);
+        this.documentController.submitUseCaseDescription(desc, this.docList, this.progressInformation, this.progressBar);
         
-        
+        this.useCaseDescriptionContent.setText("");
+        this.documentDescriptionWindow.setEnabled(false);
+        this.documentDescriptionWindow.setVisible(false);
     }//GEN-LAST:event_submitDocumentDescriptionActionPerformed
 
     private void progressBarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_progressBarPropertyChange
@@ -918,6 +926,8 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         
         this.statementController.storeStatement(nama, content);
 
+        this.newStatementName.setText("");
+        this.newStatementContent.setText("");
     }//GEN-LAST:event_newStatementAddActionPerformed
 
     private void statementListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_statementListValueChanged
@@ -933,31 +943,16 @@ public class ProjectWorksheet extends javax.swing.JFrame {
 
     private void deleteStatementBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteStatementBtnActionPerformed
         String statName = this.statementList.getSelectedValue();
-        
-        this.confirmDeleteStatementMessage.setText("Are you sure want to delete statement " + statName + " ?");
-        this.deleteStatementConfirmation.setVisible(true);
-        this.deleteStatementConfirmation.setEnabled(true);
-
+        this.statementController.deleteStatementConfirmation(statName, this.confirmDeleteStatementMessage, this.deleteStatementConfirmation);;
     }//GEN-LAST:event_deleteStatementBtnActionPerformed
 
     private void deleteStatementYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteStatementYesActionPerformed
 
         String statName = this.statementList.getSelectedValue();
-        
-        for(final Statement i: this.project.statementList){
-            if(i.Nama_statement.equals(statName)){
-                this.project.statementList.remove(i);
-                break;
-            }
-        }
-
         int index = this.statementList.getSelectedIndex();
         
-        if(index != -1){
-            this.statementLstModel.remove(index);
-        }
-        
-        
+        this.statementController.deleteSelectedStatement(statName, index);
+                
         this.statementContent.setText("");
         this.deleteStatementConfirmation.setVisible(false);
         this.deleteStatementConfirmation.setEnabled(false);
@@ -981,7 +976,7 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         String statName = this.statementList.getSelectedValue();
         String statContent = this.statementContent.getText();
         
-        this.statementController.storeChangedStatement(statName, statContent,this.editStatementContentTxt.getText(), this.editStatementNameTxt.getText() , statementList);
+        this.statementController.storeChangedStatement(statName,this.editStatementNameTxt.getText() , statContent,this.editStatementContentTxt.getText(), statementList);
 
         this.statementContent.setText(this.editStatementContentTxt.getText());
         this.editStatementWindow.setVisible(false);
@@ -1190,7 +1185,7 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         this.statementList.setModel(statementLstModel);
     }
     
-    private void changeEnable(Boolean params){
+    public void changeEnable(Boolean params){
         this.documentContent.setEnabled(params);
         this.docList.setEnabled(params);
         this.saveProjectMenuItem.setEnabled(params);
@@ -1234,99 +1229,6 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         
         this.progressInformation.setEnabled(false);
         this.progressInformation.setVisible(false);
-    }
-    
-    public void showUseCaseDescriptionForm(){
-        String label = "Description for use case : " + this.docList.getSelectedValue();
-        this.useCaseDescriptionLabel.setText(label);
-        this.documentDescriptionWindow.setEnabled(true);
-        this.documentDescriptionWindow.setVisible(true);
-    }
-    
-    public void saveUseCaseDescription(String description){
-        for(final RequirementDocument i: this.project.docList){
-            if(i.Nama_document.equals(this.docList.getSelectedValue())){
-                i.addDeskripsi(description);
-                break;
-            }
-        }
-        ProgressTask countTask = new ProgressTask();
-        countTask.start();
-        this.progressInformation.setEnabled(true);
-        this.progressInformation.setVisible(true);
-        this.progressBar.setEnabled(true);
-        this.progressBar.setVisible(true);
-        
-        this.documentDescriptionWindow.setEnabled(false);
-        this.documentDescriptionWindow.setVisible(false);
-        this.useCaseDescriptionContent.setText("");
-    }
-    
-    public void createNewProject(String name, String path, String desc, String tgl){
-        String fullNama = path+"\\"+name+".ran";
-        project = new Project("01", fullNama, "private", tgl);
-        project.create(project, fullNama);
-    }
-    
-    public void showCreateProjectDescriptionWindow(){
-        this.projectDescriptionWindow.setEnabled(true);
-        this.projectDescriptionWindow.setVisible(true);
-        
-    }
-    
-    public void showOpenProjectDescriptionWindow(){
-//        this.projectDescriptionWindow.setEnabled(true);
-//        this.projectDescriptionWindow.setVisible(true);
-        int returnVal = this.projectOpener.showOpenDialog(this);
-        File file;
-        if(returnVal == JFileChooser.APPROVE_OPTION){
-            file = projectOpener.getSelectedFile();
-            
-            project = new Project();
-            project = project.open(file.getAbsolutePath());
-            this.projectName = project.Nama_project;
-            this.setTitle(file.getName());
-        }
-        
-        changeEnable(true);
-        initListDoc();
-        
-        initListStatement();
-    }
-    
-    public void storeStatement(String nama, String isi){
-        this.project.addStatement(new Statement(isi, nama));
-        
-        this.statementList.setModel(this.statementLstModel);
-        
-        this.newStatementName.setText("");
-        this.newStatementContent.setText("");
-    }
-    
-    public void showConfirmDocumentDelete(String name){
-        this.confirmMessage.setVisible(true);
-        this.confirmMessage.setText("Are you sure want to delete document " + name + " ?");
-        this.deleteDocConfirmation.setEnabled(true);
-        this.deleteDocConfirmation.setVisible(true);
-    }
-    
-    public void deleteSelectedDocument(String name){
-        for(final RequirementDocument i: project.docList){
-            if(i.Nama_document.equals(name)){
-                project.docList.remove(i);
-                break;
-            }
-        }
-        
-        int selectedIndex = this.docList.getSelectedIndex();
-        
-        if(selectedIndex != -1){
-            model.remove(selectedIndex);
-        }
-        
-        this.documentContent.setText("");
-        this.deleteDocConfirmation.setEnabled(false);
-        this.deleteDocConfirmation.setVisible(false);
     }
 }
 

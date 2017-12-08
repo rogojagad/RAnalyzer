@@ -9,6 +9,7 @@ package ranalyzer;
  *
  * @author 5115100168
  */
+import javax.swing.*;
 public class ProjectController {
     ProjectWorksheet gui;
     
@@ -20,11 +21,17 @@ public class ProjectController {
         this.gui = guiParam;
     }
     
-    public void showProjectDescriptionWindow(){
-        this.gui.showCreateProjectDescriptionWindow();
+    public void showProjectDescriptionWindow(JDialog projectDescriptionWindow){
+        projectDescriptionWindow.setEnabled(true);
+        projectDescriptionWindow.setVisible(true);
+//        this.gui.showCreateProjectDescriptionWindow();
     }
     
     public void createNewProject(String name, String path, String desc, String tgl){
-        this.gui.createNewProject(name, path, desc, tgl);
+        String fullNama = path+"\\"+name+".ran";
+        this.gui.project = new Project("01", fullNama, "private", tgl);
+        this.gui.project.create(this.gui.project, fullNama);
+        this.gui.projectName = name;
+//        this.gui.createNewProject(name, path, desc, tgl);
     }
 }
