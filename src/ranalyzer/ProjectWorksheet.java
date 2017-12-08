@@ -972,28 +972,17 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         String statName = this.statementList.getSelectedValue();
         String statContent = null;
         
-        this.statementController.editStatement(statName, statContent);
+        this.statementController.editStatement(statName, statContent, this.editStatementNameTxt, this.editStatementContentTxt);
+        this.editStatementWindow.setEnabled(true);
+        this.editStatementWindow.setVisible(true);
     }//GEN-LAST:event_editStatementBtnActionPerformed
 
     private void editStatementSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStatementSaveActionPerformed
         String statName = this.statementList.getSelectedValue();
         String statContent = this.statementContent.getText();
         
-        int index = this.statementList.getSelectedIndex();
-        
-        if(index != -1){
-            this.statementLstModel.remove(index);
-        }
-        
-        for(final Statement i: this.project.statementList){
-            if(i.Nama_statement.equals(statName)){
-                i.Statement_content = this.editStatementContentTxt.getText();
-                i.Nama_statement = this.editStatementNameTxt.getText();
-                break;
-            }
-        }
-        
-        this.statementLstModel.addElement(this.editStatementNameTxt.getText());
+        this.statementController.storeChangedStatement(statName, statContent,this.editStatementContentTxt.getText(), this.editStatementNameTxt.getText() , statementList);
+
         this.statementContent.setText(this.editStatementContentTxt.getText());
         this.editStatementWindow.setVisible(false);
         this.editStatementWindow.setEnabled(false);
@@ -1312,22 +1301,6 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         
         this.newStatementName.setText("");
         this.newStatementContent.setText("");
-    }
-    
-    public void editStatement(String name, String content){
-        for(final Statement i: this.project.statementList){
-            if(i.Nama_statement.equals(name)){
-                content = i.Statement_content;
-                break;
-            }
-        }
-        
-        this.editStatementNameTxt.setText(name);
-        this.editStatementContentTxt.setText(content);
-        this.tmpStatName = name;
-        
-        this.editStatementWindow.setEnabled(true);
-        this.editStatementWindow.setVisible(true);
     }
     
     public void showConfirmDocumentDelete(String name){

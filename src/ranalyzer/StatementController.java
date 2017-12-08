@@ -14,6 +14,8 @@ import javax.swing.*;
 public class StatementController {
     ProjectWorksheet gui;
     JDialog statementDescriptionWindow;
+    JTextField editStatementNameTxt;
+    JTextArea editStatementContentTxt;
     
     public StatementController(){
         
@@ -36,7 +38,39 @@ public class StatementController {
         this.statementDescriptionWindow.setVisible(false);
     }
     
-    public void editStatement(String name, String content){
-        this.gui.editStatement(name, content);
+    public void storeChangedStatement(String oldName, String oldContent, String newName, String newContent,JList<String> statementListParam){
+        int index = statementListParam.getSelectedIndex();
+        
+        if(index != -1){
+            this.gui.statementLstModel.remove(index);
+        }
+        
+        for(final Statement i: this.gui.project.statementList){
+            if(i.Nama_statement.equals(oldName)){
+                i.Statement_content = newContent;
+                i.Nama_statement = newName;
+                break;
+            }
+        }
+        
+        this.gui.statementLstModel.addElement(newName);
+        
+    }
+    
+    public void editStatement(String name, String content, JTextField statName, JTextArea statContent){
+        this.editStatementNameTxt = statName;
+        this.editStatementContentTxt = statContent;
+        
+        for(final Statement i: this.gui.project.statementList){
+            if(i.Nama_statement.equals(name)){
+                content = i.Statement_content;
+                break;
+            }
+        }
+        
+        this.editStatementNameTxt.setText(name);
+        this.editStatementContentTxt.setText(content);
+        this.gui.tmpStatName = name;
+//        this.gui.editStatement(name, content);
     }
 }
