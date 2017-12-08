@@ -17,7 +17,7 @@ public class RAnalyzer {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUI().setVisible(true);
+                new ProjectWorksheet().setVisible(true);
             }
         });
     }

@@ -10,13 +10,13 @@ package ranalyzer;
  * @author 5115100168
  */
 public class ExistingProjectController {
-    GUI gui;
+    ProjectWorksheet gui;
     
     public ExistingProjectController(){
         
     }
     
-    public ExistingProjectController(GUI guiParam){
+    public ExistingProjectController(ProjectWorksheet guiParam){
         this.gui = guiParam;
     }
     
