@@ -909,7 +909,7 @@ public class ProjectWorksheet extends javax.swing.JFrame {
     }//GEN-LAST:event_progressBarPropertyChange
 
     private void addStatementBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStatementBtnActionPerformed
-        this.statementController.showStatementForm();
+        this.statementController.showStatementForm(this.addStatementWindow);
     }//GEN-LAST:event_addStatementBtnActionPerformed
 
     private void newStatementAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newStatementAddActionPerformed
@@ -1282,6 +1282,7 @@ public class ProjectWorksheet extends javax.swing.JFrame {
     public void showCreateProjectDescriptionWindow(){
         this.projectDescriptionWindow.setEnabled(true);
         this.projectDescriptionWindow.setVisible(true);
+        
     }
     
     public void showOpenProjectDescriptionWindow(){
@@ -1304,17 +1305,8 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         initListStatement();
     }
     
-    public void showStatementDescriptionWindow(){
-        this.addStatementWindow.setEnabled(true);
-        this.addStatementWindow.setVisible(true);
-    }
-    
     public void storeStatement(String nama, String isi){
         this.project.addStatement(new Statement(isi, nama));
-        
-        this.statementLstModel.addElement(nama);
-        this.addStatementWindow.setEnabled(false);
-        this.addStatementWindow.setVisible(false);
         
         this.statementList.setModel(this.statementLstModel);
         
