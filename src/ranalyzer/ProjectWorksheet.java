@@ -10,9 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.Date;
+import java.util.*;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
@@ -36,6 +34,7 @@ public class ProjectWorksheet extends javax.swing.JFrame {
     ProjectController projectController;
     ExistingProjectController existingProjectController;
     StatementController statementController;
+    DependencyController dependencyController;
     
     public ProjectWorksheet() {
         initComponents();
@@ -44,6 +43,7 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         projectController = new ProjectController(this);
         existingProjectController = new ExistingProjectController(this);
         statementController = new StatementController(this);
+        dependencyController = new DependencyController(this);
     }
 
     /**
@@ -562,7 +562,6 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         );
 
         newProjectDirectoryChooser.setDialogTitle("Select project directory");
-        newProjectDirectoryChooser.setFileHidingEnabled(true);
         newProjectDirectoryChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -687,6 +686,11 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         checkDependencyBtn.setText("Check Dependency");
 
         viewDependencyBtn.setText("View Dependency");
+        viewDependencyBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewDependencyBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -848,6 +852,7 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         for(final RequirementDocument i: project.docList){
             if(i.Nama_document.equals(namaFile)){
                 this.documentContent.setText(i.getContent());
+                this.documentContent.append("Description:\n" + i.deskripsi);
                 break;
             }
         }
@@ -976,7 +981,7 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         String statName = this.statementList.getSelectedValue();
         String statContent = this.statementContent.getText();
         
-        this.statementController.storeChangedStatement(statName,this.editStatementNameTxt.getText() , statContent,this.editStatementContentTxt.getText(), statementList);
+        this.statementController.storeChangedStatement(statName,statContent, this.editStatementNameTxt.getText(),this.editStatementContentTxt.getText(), statementList);
 
         this.statementContent.setText(this.editStatementContentTxt.getText());
         this.editStatementWindow.setVisible(false);
@@ -1011,6 +1016,21 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         
         this.changeEnable(true);
     }//GEN-LAST:event_newProjectContinueBtnActionPerformed
+
+    private void viewDependencyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDependencyBtnActionPerformed
+        List<Component> components = new ArrayList<Component>();
+        List<Statement> statements = new ArrayList<Statement>();
+        List<Relation> relationList = new ArrayList<Relation>();
+        
+        for(final RequirementDocument i: this.project.docList){
+            components = i.componentList;
+            relationList = i.relationList;
+        }
+        
+        statements = this.project.statementList;
+        
+        this.dependencyController.checkDependency(components, statements, relationList);
+    }//GEN-LAST:event_viewDependencyBtnActionPerformed
     
     
     /**

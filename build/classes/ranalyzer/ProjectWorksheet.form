@@ -702,7 +702,6 @@
     <Component class="javax.swing.JFileChooser" name="newProjectDirectoryChooser">
       <Properties>
         <Property name="dialogTitle" type="java.lang.String" value="Select project directory"/>
-        <Property name="fileHidingEnabled" type="boolean" value="true"/>
         <Property name="fileSelectionMode" type="int" value="1"/>
       </Properties>
     </Component>
@@ -1077,6 +1076,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="View Dependency"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewDependencyBtnActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

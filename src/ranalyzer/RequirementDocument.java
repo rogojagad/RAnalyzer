@@ -63,7 +63,9 @@ public class RequirementDocument {
                     String name = curr.getAttribute("name");
                     String type = curr.getAttribute("xmi:type");
                     
-                    componentList.add(new Component(id, type, name));
+                    String[] stripType = type.split(":");
+                    
+                    componentList.add(new Component(id, stripType[1], name));
                 }
             }
             
