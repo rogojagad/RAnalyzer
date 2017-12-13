@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.0" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1">
+	<xmi:Documentation exporter="StarUML" exporterVersion="2.0"/>
+	<uml:Model xmi:id="AAAAAAFgKrPskRM1pOI=" xmi:type="uml:Model" name="RootModel">
+		<packagedElement xmi:id="AAAAAAFF+qBWK6M3Z8Y=" name="Model" visibility="public" xmi:type="uml:Model">
+			<packagedElement xmi:id="AAAAAAFgKrKByxGLUOE=" name="ProjectOwner" visibility="public" isAbstract="false" isFinalSpecialization="false" isLeaf="false" xmi:type="uml:Actor">
+				<ownedMember xmi:id="AAAAAAFgKrOLJRJZsqk=" visibility="public" xmi:type="uml:Association" isDerived="false">
+					<ownedEnd xmi:id="AAAAAAFgKrOLJRJas7s=" visibility="public" isStatic="false" isLeaf="false" isReadOnly="false" isOrdered="false" isUnique="false" xmi:type="uml:Property" aggregation="none" isDerived="false" isID="false" type="AAAAAAFgKrKByxGLUOE="/>
+					<ownedEnd xmi:id="AAAAAAFgKrOLJRJbKKs=" visibility="public" isStatic="false" isLeaf="false" isReadOnly="false" isOrdered="false" isUnique="false" xmi:type="uml:Property" aggregation="none" isDerived="false" isID="false" type="AAAAAAFgKrMifRH9Bo8="/>
+					<memberEnd xmi:idref="AAAAAAFgKrOLJRJas7s="/>
+					<memberEnd xmi:idref="AAAAAAFgKrOLJRJbKKs="/>
+				</ownedMember>
+			</packagedElement>
+			<packagedElement xmi:id="AAAAAAFgKrLAtRG3tmM=" name="ReqEngineer" visibility="public" isAbstract="false" isFinalSpecialization="false" isLeaf="false" xmi:type="uml:Actor">
+				<ownedMember xmi:id="AAAAAAFgKrOggRKcNgg=" visibility="public" xmi:type="uml:Association" isDerived="false">
+					<ownedEnd xmi:id="AAAAAAFgKrOggRKdx2E=" visibility="public" isStatic="false" isLeaf="false" isReadOnly="false" isOrdered="false" isUnique="false" xmi:type="uml:Property" aggregation="none" isDerived="false" isID="false" type="AAAAAAFgKrLAtRG3tmM="/>
+					<ownedEnd xmi:id="AAAAAAFgKrOggRKegdE=" visibility="public" isStatic="false" isLeaf="false" isReadOnly="false" isOrdered="false" isUnique="false" xmi:type="uml:Property" aggregation="none" isDerived="false" isID="false" type="AAAAAAFgKrNSQhIrkwk="/>
+					<memberEnd xmi:idref="AAAAAAFgKrOggRKdx2E="/>
+					<memberEnd xmi:idref="AAAAAAFgKrOggRKegdE="/>
+				</ownedMember>
+			</packagedElement>
+			<packagedElement xmi:id="AAAAAAFgKrMifRH9Bo8=" name="Financial Analysis" visibility="public" isAbstract="false" isFinalSpecialization="false" isLeaf="false" xmi:type="uml:UseCase">
+				<include xmi:id="AAAAAAFgKrPB8RL6X7Y=" visibility="public" xmi:type="uml:Include" addition="AAAAAAFgKrNSQhIrkwk=" includingCase="AAAAAAFgKrMifRH9Bo8="/>
+			</packagedElement>
+			<packagedElement xmi:id="AAAAAAFgKrNSQhIrkwk=" name="Export project to XMI" visibility="public" isAbstract="false" isFinalSpecialization="false" isLeaf="false" xmi:type="uml:UseCase"/>
+		</packagedElement>
+	</uml:Model>
+</xmi:XMI>

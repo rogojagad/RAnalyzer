@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.0" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1">
+	<xmi:Documentation exporter="StarUML" exporterVersion="2.0"/>
+	<uml:Model xmi:id="AAAAAAFgKqgP+Q8rcHU=" xmi:type="uml:Model" name="RootModel">
+		<packagedElement xmi:id="AAAAAAFgEtYYjRtjH54=" name="Perpustakaan" visibility="public" xmi:type="uml:Model">
+			<packagedElement xmi:id="AAAAAAFgEtYlzhtoJ9g=" name="ReqEngineer" visibility="public" isAbstract="false" isFinalSpecialization="false" isLeaf="false" xmi:type="uml:Actor">
+				<ownedMember xmi:id="AAAAAAFgKqe46w6KkFc=" visibility="public" xmi:type="uml:Association" isDerived="false">
+					<ownedEnd xmi:id="AAAAAAFgKqe46w6LAjk=" visibility="public" isStatic="false" isLeaf="false" isReadOnly="false" isOrdered="false" isUnique="false" xmi:type="uml:Property" aggregation="none" isDerived="false" isID="false" type="AAAAAAFgEtYlzhtoJ9g="/>
+					<ownedEnd xmi:id="AAAAAAFgKqe46w6Mztg=" visibility="public" isStatic="false" isLeaf="false" isReadOnly="false" isOrdered="false" isUnique="false" xmi:type="uml:Property" aggregation="none" isDerived="false" isID="false" type="AAAAAAFgF1M+SGsdueo="/>
+					<memberEnd xmi:idref="AAAAAAFgKqe46w6LAjk="/>
+					<memberEnd xmi:idref="AAAAAAFgKqe46w6Mztg="/>
+				</ownedMember>
+				<ownedMember xmi:id="AAAAAAFgKqfM8w7NLDg=" visibility="public" xmi:type="uml:Association" isDerived="false">
+					<ownedEnd xmi:id="AAAAAAFgKqfM8w7OcSU=" visibility="public" isStatic="false" isLeaf="false" isReadOnly="false" isOrdered="false" isUnique="false" xmi:type="uml:Property" aggregation="none" isDerived="false" isID="false" type="AAAAAAFgEtYlzhtoJ9g="/>
+					<ownedEnd xmi:id="AAAAAAFgKqfM8w7PLlk=" visibility="public" isStatic="false" isLeaf="false" isReadOnly="false" isOrdered="false" isUnique="false" xmi:type="uml:Property" aggregation="none" isDerived="false" isID="false" type="AAAAAAFgF1Ogmmt70Hk="/>
+					<memberEnd xmi:idref="AAAAAAFgKqfM8w7OcSU="/>
+					<memberEnd xmi:idref="AAAAAAFgKqfM8w7PLlk="/>
+				</ownedMember>
+			</packagedElement>
+			<packagedElement xmi:id="AAAAAAFgF1M+SGsdueo=" name="Create new Project" visibility="public" isAbstract="false" isFinalSpecialization="false" isLeaf="false" xmi:type="uml:UseCase">
+				<include xmi:id="AAAAAAFgF1Q4rWyAKbU=" visibility="public" xmi:type="uml:Include" addition="AAAAAAFgF1Nu7GtMOTU=" includingCase="AAAAAAFgF1M+SGsdueo="/>
+			</packagedElement>
+			<packagedElement xmi:id="AAAAAAFgF1Nu7GtMOTU=" name="Show project worksheet" visibility="public" isAbstract="false" isFinalSpecialization="false" isLeaf="false" xmi:type="uml:UseCase"/>
+			<packagedElement xmi:id="AAAAAAFgF1Ogmmt70Hk=" name="Open existing project" visibility="public" isAbstract="false" isFinalSpecialization="false" isLeaf="false" xmi:type="uml:UseCase">
+				<include xmi:id="AAAAAAFgF1RMzmyvAL0=" visibility="public" xmi:type="uml:Include" addition="AAAAAAFgF1Nu7GtMOTU=" includingCase="AAAAAAFgF1Ogmmt70Hk="/>
+			</packagedElement>
+		</packagedElement>
+	</uml:Model>
+</xmi:XMI>

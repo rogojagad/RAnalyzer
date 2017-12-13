@@ -111,7 +111,7 @@ public class DependencyController {
         
         tokenStream = new StopFilter(Version.LUCENE_36, tokenStream, StandardAnalyzer.STOP_WORDS_SET);
         
-        List<String> stopWords = new ArrayList<String>(Arrays.asList("a","can", "may", "should"));
+        List<String> stopWords = new ArrayList<String>(Arrays.asList("a","can", "may", "should", "shall", "will"));
         
         tokenStream = new StopFilter(Version.LUCENE_36, tokenStream, StopFilter.makeStopSet(Version.LUCENE_36, stopWords));
         
