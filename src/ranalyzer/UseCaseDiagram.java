@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package ranalyzer;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.io.*;
 import java.util.*;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,42 +16,19 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+
 /**
  *
  * @author 5115100168
  */
-public class RequirementDocument {
-    public String Id_document;
-    public String Nama_document;
+public class UseCaseDiagram {
     public String Document_path;
-    public String Tanggal_document;
-    public String content;
-    public String deskripsi;
-    public UseCaseDiagram ucd;
     public List<Component> componentList = new ArrayList<Component>(1000);
     public List<Relation> relationList = new ArrayList<Relation>(1000);
     
-    public RequirementDocument(){
-        
-    }
-    
-    public void addDeskripsi(String newDeskripsi){
-        this.deskripsi = newDeskripsi;
-    }
-    
-    public RequirementDocument(String id, String nama, String path, String content){
-        this.Id_document = id;
-        this.Nama_document = nama;
-        this.Document_path = path;
-        this.content = content;
-        this.ucd = new UseCaseDiagram();
-        this.ucd.create(this.Document_path);
-//        readComponents();
-    }
-    
-    public void readComponents(){
+    public void create(String Document_path){
         try{
-            File inputFile = new File(this.Document_path);
+            File inputFile = new File(Document_path);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);
@@ -146,15 +126,7 @@ public class RequirementDocument {
         System.out.println("========================\n");
     }
     
-    public void addDocument(){
-        
-    }
-    
-    public void removeDocument(){
-        
-    }
-    
-    public static String findNameById(String id, RequirementDocument e){
+    public static String findNameById(String id, UseCaseDiagram e){
         String res="";
         for (Component i : e.componentList) {
             if(i.xmiId.equals(id)){
@@ -168,13 +140,13 @@ public class RequirementDocument {
     public String getContent(){
         String content = "Component list : \n";
         
-        for(final Component i: this.ucd.componentList){
+        for(final Component i: componentList){
             content = content + "- " + i.umlName + " as " + i.umlType + "\n";
         }
         
         content = content + "\nRelation list : \n";
         
-        for(final Relation i: this.ucd.relationList){
+        for(final Relation i: relationList){
             content = content + "- " + i.idSrc + " " + i.relation + " " + i.idDestination + "\n";
         }
         

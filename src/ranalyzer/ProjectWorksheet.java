@@ -36,6 +36,7 @@ public class ProjectWorksheet extends javax.swing.JFrame {
     StatementController statementController;
     DependencyController dependencyController;
     
+    
     public ProjectWorksheet() {
         initComponents();
         changeEnable(false);
@@ -104,6 +105,9 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         newProjectContinueBtn = new javax.swing.JButton();
         newProjectDirectoryChooser = new javax.swing.JFileChooser();
+        dependencyCheckProgressWindow = new javax.swing.JDialog();
+        checkDependencyProgressBar = new javax.swing.JProgressBar();
+        checkDependencyLbl = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         docList = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
@@ -116,7 +120,6 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         deleteStatementBtn = new javax.swing.JButton();
         addStatementBtn = new javax.swing.JButton();
-        editStatementBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         checkDependencyBtn = new javax.swing.JButton();
         viewDependencyBtn = new javax.swing.JButton();
@@ -564,6 +567,42 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         newProjectDirectoryChooser.setDialogTitle("Select project directory");
         newProjectDirectoryChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
+        dependencyCheckProgressWindow.setMinimumSize(new java.awt.Dimension(500, 150));
+        dependencyCheckProgressWindow.setModalityType(java.awt.Dialog.ModalityType.DOCUMENT_MODAL);
+
+        checkDependencyProgressBar.setStringPainted(true);
+        checkDependencyProgressBar.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                checkDependencyProgressBarPropertyChange(evt);
+            }
+        });
+
+        checkDependencyLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        checkDependencyLbl.setText("Checking Dependency");
+
+        javax.swing.GroupLayout dependencyCheckProgressWindowLayout = new javax.swing.GroupLayout(dependencyCheckProgressWindow.getContentPane());
+        dependencyCheckProgressWindow.getContentPane().setLayout(dependencyCheckProgressWindowLayout);
+        dependencyCheckProgressWindowLayout.setHorizontalGroup(
+            dependencyCheckProgressWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dependencyCheckProgressWindowLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(checkDependencyProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dependencyCheckProgressWindowLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(checkDependencyLbl)
+                .addGap(112, 112, 112))
+        );
+        dependencyCheckProgressWindowLayout.setVerticalGroup(
+            dependencyCheckProgressWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dependencyCheckProgressWindowLayout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addComponent(checkDependencyLbl)
+                .addGap(42, 42, 42)
+                .addComponent(checkDependencyProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Requirement Analyzer");
         setResizable(false);
@@ -650,13 +689,6 @@ public class ProjectWorksheet extends javax.swing.JFrame {
             }
         });
 
-        editStatementBtn.setText("Edit Statement");
-        editStatementBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editStatementBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -664,7 +696,6 @@ public class ProjectWorksheet extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(41, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(editStatementBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addStatementBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteStatementBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39))
@@ -675,15 +706,18 @@ public class ProjectWorksheet extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(addStatementBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(editStatementBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(deleteStatementBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dependency"));
 
         checkDependencyBtn.setText("Check Dependency");
+        checkDependencyBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkDependencyBtnActionPerformed(evt);
+            }
+        });
 
         viewDependencyBtn.setText("View Dependency");
         viewDependencyBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -697,22 +731,27 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(viewDependencyBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(56, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(viewDependencyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(checkDependencyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52))
+                .addGap(51, 51, 51))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(checkDependencyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addComponent(viewDependencyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(checkDependencyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
 
+        statementList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                statementListMouseClicked(evt);
+            }
+        });
         statementList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 statementListValueChanged(evt);
@@ -820,11 +859,11 @@ public class ProjectWorksheet extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
                             .addComponent(jScrollPane6))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addGap(36, 36, 36)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37))))
+                        .addGap(58, 58, 58))))
         );
 
         pack();
@@ -905,6 +944,7 @@ public class ProjectWorksheet extends javax.swing.JFrame {
 
         this.documentController.loadUseCaseDescriptionForm(this.docList.getSelectedValue(), this.useCaseDescriptionLabel, this.documentDescriptionWindow);
         
+        
     }//GEN-LAST:event_addDescriptionButtonActionPerformed
 
     private void submitDocumentDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitDocumentDescriptionActionPerformed
@@ -915,6 +955,8 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         this.useCaseDescriptionContent.setText("");
         this.documentDescriptionWindow.setEnabled(false);
         this.documentDescriptionWindow.setVisible(false);
+        
+        this.docList.setModel(model);
     }//GEN-LAST:event_submitDocumentDescriptionActionPerformed
 
     private void progressBarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_progressBarPropertyChange
@@ -968,15 +1010,6 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         this.deleteStatementConfirmation.setEnabled(false);
     }//GEN-LAST:event_deleteStatementNoActionPerformed
 
-    private void editStatementBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStatementBtnActionPerformed
-        String statName = this.statementList.getSelectedValue();
-        String statContent = null;
-        
-        this.statementController.editStatement(statName, statContent, this.editStatementNameTxt, this.editStatementContentTxt);
-        this.editStatementWindow.setEnabled(true);
-        this.editStatementWindow.setVisible(true);
-    }//GEN-LAST:event_editStatementBtnActionPerformed
-
     private void editStatementSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStatementSaveActionPerformed
         String statName = this.statementList.getSelectedValue();
         String statContent = this.statementContent.getText();
@@ -1023,14 +1056,46 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         List<Relation> relationList = new ArrayList<Relation>();
         
         for(final RequirementDocument i: this.project.docList){
-            components = i.componentList;
-            relationList = i.relationList;
+            components = i.ucd.componentList;
+            relationList = i.ucd.relationList;
         }
         
         statements = this.project.statementList;
         
-        this.dependencyController.checkDependency(components, statements, relationList);
+        this.dependencyController.viewDependency(components, statements, relationList);
     }//GEN-LAST:event_viewDependencyBtnActionPerformed
+
+    private void checkDependencyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkDependencyBtnActionPerformed
+        this.dependencyController.loading(this.dependencyCheckProgressWindow, this.checkDependencyProgressBar);
+        
+        List<Component> components = new ArrayList<Component>();
+        List<Statement> statements = new ArrayList<Statement>();
+        List<Relation> relationList = new ArrayList<Relation>();
+        
+        for(final RequirementDocument i: this.project.docList){
+            components = i.ucd.componentList;
+            relationList = i.ucd.relationList;
+        }
+        
+        statements = this.project.statementList;
+        
+        this.dependencyController.viewDependency(components, statements, relationList);        
+    }//GEN-LAST:event_checkDependencyBtnActionPerformed
+
+    private void checkDependencyProgressBarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_checkDependencyProgressBarPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkDependencyProgressBarPropertyChange
+
+    private void statementListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statementListMouseClicked
+        if(evt.getClickCount() == 2){
+            String statName = this.statementList.getSelectedValue();
+            String statContent = null;
+
+            this.statementController.editStatement(statName, statContent, this.editStatementNameTxt, this.editStatementContentTxt);
+            this.editStatementWindow.setEnabled(true);
+            this.editStatementWindow.setVisible(true);
+        }
+    }//GEN-LAST:event_statementListMouseClicked
     
     
     /**
@@ -1075,6 +1140,8 @@ public class ProjectWorksheet extends javax.swing.JFrame {
     private javax.swing.JButton addStatementBtn;
     private javax.swing.JDialog addStatementWindow;
     private javax.swing.JButton checkDependencyBtn;
+    private javax.swing.JLabel checkDependencyLbl;
+    private javax.swing.JProgressBar checkDependencyProgressBar;
     private javax.swing.JMenuItem closeProjectMenuItem;
     private javax.swing.JLabel confirmDeleteStatementMessage;
     private javax.swing.JLabel confirmMessage;
@@ -1087,12 +1154,12 @@ public class ProjectWorksheet extends javax.swing.JFrame {
     private javax.swing.JDialog deleteStatementConfirmation;
     private javax.swing.JButton deleteStatementNo;
     private javax.swing.JButton deleteStatementYes;
+    private javax.swing.JDialog dependencyCheckProgressWindow;
     private javax.swing.JList<String> docList;
     private javax.swing.JTextArea documentContent;
     private javax.swing.JDialog documentDescriptionWindow;
     private javax.swing.JFileChooser documentOpener;
     private javax.swing.JPanel documentPanel;
-    private javax.swing.JButton editStatementBtn;
     private javax.swing.JTextArea editStatementContentTxt;
     private javax.swing.JTextField editStatementNameTxt;
     private javax.swing.JButton editStatementSave;
@@ -1214,7 +1281,7 @@ public class ProjectWorksheet extends javax.swing.JFrame {
         this.deleteDocumentBtn.setEnabled(params);
         this.addStatementBtn.setEnabled(params);
         this.deleteStatementBtn.setEnabled(params);
-        this.editStatementBtn.setEnabled(params);
+        
         this.viewDependencyBtn.setEnabled(params);
         this.checkDependencyBtn.setEnabled(params);
         this.addDescriptionButton.setEnabled(params);

@@ -5,11 +5,13 @@
  */
 package ranalyzer;
 
+import javax.swing.*;
 import info.debatty.java.stringsimilarity.JaroWinkler;
 import java.util.*;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.StopAnalyzer;
 import org.apache.lucene.analysis.StopFilter;
@@ -25,6 +27,9 @@ import org.graphstream.graph.implementations.*;
  */
 public class DependencyController {
     ProjectWorksheet gui;
+    JDialog dependencyCheckWindow;
+    JProgressBar checkDependencyProgressBar;
+    
     public DependencyController(){
         
     }
@@ -33,7 +38,51 @@ public class DependencyController {
         this.gui = paramGui;
     }
     
-    public void checkDependency(List<Component> components, List<Statement> statements, List<Relation> relations){
+    public void loading(JDialog dependencyCheckWindow, JProgressBar checkDependencyProgressBar){
+        this.dependencyCheckWindow = dependencyCheckWindow;
+        this.checkDependencyProgressBar = checkDependencyProgressBar;
+        
+        Task task = new Task();
+        task.start();
+        
+        this.dependencyCheckWindow.setVisible(true);
+        this.dependencyCheckWindow.setEnabled(true);
+        this.checkDependencyProgressBar.setVisible(true);
+        this.checkDependencyProgressBar.setEnabled(true);
+    }
+    
+    private class Task extends Thread{
+        public Task(){
+            
+        }
+        
+        public void run(){
+            for(int i = 0; i <= 100; i++){
+                final int progress = i;
+                
+                SwingUtilities.invokeLater(new Runnable(){
+                    public void run(){
+                        checkDependencyProgressBar.setValue(progress);
+                    }
+                });
+                try {
+                    Thread.sleep(20);
+                 } catch (InterruptedException e) {}
+            }
+            
+            dismissProgressDialog();
+        }
+    }
+    
+    public void dismissProgressDialog(){
+        this.checkDependencyProgressBar.setEnabled(false);
+        this.checkDependencyProgressBar.setVisible(false);
+        
+        this.dependencyCheckWindow.setEnabled(false);
+        this.dependencyCheckWindow.setVisible(false);
+    }
+    
+    public void viewDependency(List<Component> components, List<Statement> statements, List<Relation> relations){
         for(final Statement i: statements){
             i.Statement_content = preprocessStatement(i.Statement_content);
         }

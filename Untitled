@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_151" class="java.beans.XMLDecoder">
+ <object class="ranalyzer.Project" id="Project0">
+  <void class="ranalyzer.Project" method="getField">
+   <string>Nama_project</string>
+   <void method="set">
+    <object idref="Project0"/>
+    <string>C:\Users\5115100168\Documents\RAnalyzer\Untitled.ran</string>
+   </void>
+  </void>
+  <void class="ranalyzer.Project" method="getField">
+   <string>Tanggal_project</string>
+   <void method="set">
+    <object idref="Project0"/>
+    <string>2017/12/16 19:00:17</string>
+   </void>
+  </void>
+ </object>
+<void class="ranalyzer.Relation" method="getField">
+ <string>idSrc</string>
+ <void method="set">
+  <object class="ranalyzer.Relation" id="Relation0">
+   <void class="ranalyzer.Relation" method="getField">
+    <string>idDestination</string>
+    <void method="set">
+     <object idref="Relation0"/>
+     <string>Create new Project</string>
+    </void>
+   </void>
+   <void class="ranalyzer.Relation" method="getField">
+    <string>relation</string>
+    <void method="set">
+     <object idref="Relation0"/>
+     <string>association</string>
+    </void>
+   </void>
+  </object>
+  <string>ReqEngineer</string>
+ </void>
+</void>
+<void class="ranalyzer.UseCaseDiagram" id="Field0" method="getField">
+ <string>componentList</string>
+ <void id="ArrayList0" method="get">
+  <object class="ranalyzer.UseCaseDiagram" id="UseCaseDiagram0"/>
+  <void method="add">
+   <object class="ranalyzer.Component" id="Component0">
+    <void class="ranalyzer.Component" method="getField">
+     <string>xmiId</string>
+     <void method="set">
+      <object idref="Component0"/>
+      <string>AAAAAAFgF1M+SGsdueo=</string>
+     </void>
+    </void>
+    <void class="ranalyzer.Component" method="getField">
+     <string>umlType</string>
+     <void method="set">
+      <object idref="Component0"/>
+      <string>UseCase</string>
+     </void>
+    </void>
+    <void class="ranalyzer.Component" method="getField">
+     <string>umlName</string>
+     <void method="set">
+      <object idref="Component0"/>
+      <string>Create new Project</string>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="ranalyzer.Component" id="Component1">
+    <void class="ranalyzer.Component" method="getField">
+     <string>xmiId</string>
+     <void method="set">
+      <object idref="Component1"/>
+      <string>AAAAAAFgF1Nu7GtMOTU=</string>
+     </void>
+    </void>
+    <void class="ranalyzer.Component" method="getField">
+     <string>umlType</string>
+     <void method="set">
+      <object idref="Component1"/>
+      <string>UseCase</string>
+     </void>
+    </void>
+    <void class="ranalyzer.Component" method="getField">
+     <string>umlName</string>
+     <void method="set">
+      <object idref="Component1"/>
+      <string>Show project worksheet</string>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="ranalyzer.Component" id="Component2">
+    <void class="ranalyzer.Component" method="getField">
+     <string>xmiId</string>
+     <void method="set">
+      <object idref="Component2"/>
+      <string>AAAAAAFgF1Ogmmt70Hk=</string>
+     </void>
+    </void>
+    <void class="ranalyzer.Component" method="getField">
+     <string>umlType</string>
+     <void method="set">
+      <object idref="Component2"/>
+      <string>UseCase</string>
+     </void>
+    </void>
+    <void class="ranalyzer.Component" method="getField">
+     <string>umlName</string>
+     <void method="set">
+      <object idref="Component2"/>
+      <string>Open existing project</string>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="ranalyzer.Component" id="Component3">
+    <void class="ranalyzer.Component" method="getField">
+     <string>xmiId</string>
+     <void method="set">
+      <object idref="Component3"/>
+      <string>AAAAAAFgEtYlzhtoJ9g=</string>
+     </void>
+    </void>
+    <void class="ranalyzer.Component" method="getField">
+     <string>umlType</string>
+     <void method="set">
+      <object idref="Component3"/>
+      <string>Actor</string>
+     </void>
+    </void>
+    <void class="ranalyzer.Component" method="getField">
+     <string>umlName</string>
+     <void method="set">
+      <object idref="Component3"/>
+      <string>ReqEngineer</string>
+     </void>
+    </void>
+   </object>
+  </void>
+ </void>
+</void>
+<void idref="ArrayList0"/>
+<void class="ranalyzer.RequirementDocument" method="getField">
+ <string>Id_document</string>
+ <void method="set">
+  <object class="ranalyzer.RequirementDocument" id="RequirementDocument0">
+   <void class="ranalyzer.RequirementDocument" method="getField">
+    <string>Nama_document</string>
+    <void method="set">
+     <object idref="RequirementDocument0"/>
+     <string>nggenah.xmi</string>
+    </void>
+   </void>
+   <void class="ranalyzer.RequirementDocument" method="getField">
+    <string>Document_path</string>
+    <void method="set">
+     <object idref="RequirementDocument0"/>
+     <string>C:\Users\5115100168\Documents\RAnalyzer\nggenah.xmi</string>
+    </void>
+   </void>
+   <void class="ranalyzer.RequirementDocument" method="getField">
+    <string>content</string>
+    <void method="set">
+     <object idref="RequirementDocument0"/>
+     <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;xmi:XMI xmi:version=&quot;2.1&quot; xmlns:uml=&quot;http://schema.omg.org/spec/UML/2.0&quot; xmlns:xmi=&quot;http://schema.omg.org/spec/XMI/2.1&quot;&gt;
+	&lt;xmi:Documentation exporter=&quot;StarUML&quot; exporterVersion=&quot;2.0&quot;/&gt;
+	&lt;uml:Model xmi:id=&quot;AAAAAAFgKqgP+Q8rcHU=&quot; xmi:type=&quot;uml:Model&quot; name=&quot;RootModel&quot;&gt;
+		&lt;packagedElement xmi:id=&quot;AAAAAAFgEtYYjRtjH54=&quot; name=&quot;Perpustakaan&quot; visibility=&quot;public&quot; xmi:type=&quot;uml:Model&quot;&gt;
+			&lt;packagedElement xmi:id=&quot;AAAAAAFgEtYlzhtoJ9g=&quot; name=&quot;ReqEngineer&quot; visibility=&quot;public&quot; isAbstract=&quot;false&quot; isFinalSpecialization=&quot;false&quot; isLeaf=&quot;false&quot; xmi:type=&quot;uml:Actor&quot;&gt;
+				&lt;ownedMember xmi:id=&quot;AAAAAAFgKqe46w6KkFc=&quot; visibility=&quot;public&quot; xmi:type=&quot;uml:Association&quot; isDerived=&quot;false&quot;&gt;
+					&lt;ownedEnd xmi:id=&quot;AAAAAAFgKqe46w6LAjk=&quot; visibility=&quot;public&quot; isStatic=&quot;false&quot; isLeaf=&quot;false&quot; isReadOnly=&quot;false&quot; isOrdered=&quot;false&quot; isUnique=&quot;false&quot; xmi:type=&quot;uml:Property&quot; aggregation=&quot;none&quot; isDerived=&quot;false&quot; isID=&quot;false&quot; type=&quot;AAAAAAFgEtYlzhtoJ9g=&quot;/&gt;
+					&lt;ownedEnd xmi:id=&quot;AAAAAAFgKqe46w6Mztg=&quot; visibility=&quot;public&quot; isStatic=&quot;false&quot; isLeaf=&quot;false&quot; isReadOnly=&quot;false&quot; isOrdered=&quot;false&quot; isUnique=&quot;false&quot; xmi:type=&quot;uml:Property&quot; aggregation=&quot;none&quot; isDerived=&quot;false&quot; isID=&quot;false&quot; type=&quot;AAAAAAFgF1M+SGsdueo=&quot;/&gt;
+					&lt;memberEnd xmi:idref=&quot;AAAAAAFgKqe46w6LAjk=&quot;/&gt;
+					&lt;memberEnd xmi:idref=&quot;AAAAAAFgKqe46w6Mztg=&quot;/&gt;
+				&lt;/ownedMember&gt;
+				&lt;ownedMember xmi:id=&quot;AAAAAAFgKqfM8w7NLDg=&quot; visibility=&quot;public&quot; xmi:type=&quot;uml:Association&quot; isDerived=&quot;false&quot;&gt;
+					&lt;ownedEnd xmi:id=&quot;AAAAAAFgKqfM8w7OcSU=&quot; visibility=&quot;public&quot; isStatic=&quot;false&quot; isLeaf=&quot;false&quot; isReadOnly=&quot;false&quot; isOrdered=&quot;false&quot; isUnique=&quot;false&quot; xmi:type=&quot;uml:Property&quot; aggregation=&quot;none&quot; isDerived=&quot;false&quot; isID=&quot;false&quot; type=&quot;AAAAAAFgEtYlzhtoJ9g=&quot;/&gt;
+					&lt;ownedEnd xmi:id=&quot;AAAAAAFgKqfM8w7PLlk=&quot; visibility=&quot;public&quot; isStatic=&quot;false&quot; isLeaf=&quot;false&quot; isReadOnly=&quot;false&quot; isOrdered=&quot;false&quot; isUnique=&quot;false&quot; xmi:type=&quot;uml:Property&quot; aggregation=&quot;none&quot; isDerived=&quot;false&quot; isID=&quot;false&quot; type=&quot;AAAAAAFgF1Ogmmt70Hk=&quot;/&gt;
+					&lt;memberEnd xmi:idref=&quot;AAAAAAFgKqfM8w7OcSU=&quot;/&gt;
+					&lt;memberEnd xmi:idref=&quot;AAAAAAFgKqfM8w7PLlk=&quot;/&gt;
+				&lt;/ownedMember&gt;
+			&lt;/packagedElement&gt;
+			&lt;packagedElement xmi:id=&quot;AAAAAAFgF1M+SGsdueo=&quot; name=&quot;Create new Project&quot; visibility=&quot;public&quot; isAbstract=&quot;false&quot; isFinalSpecialization=&quot;false&quot; isLeaf=&quot;false&quot; xmi:type=&quot;uml:UseCase&quot;&gt;
+				&lt;include xmi:id=&quot;AAAAAAFgF1Q4rWyAKbU=&quot; visibility=&quot;public&quot; xmi:type=&quot;uml:Include&quot; addition=&quot;AAAAAAFgF1Nu7GtMOTU=&quot; includingCase=&quot;AAAAAAFgF1M+SGsdueo=&quot;/&gt;
+			&lt;/packagedElement&gt;
+			&lt;packagedElement xmi:id=&quot;AAAAAAFgF1Nu7GtMOTU=&quot; name=&quot;Show project worksheet&quot; visibility=&quot;public&quot; isAbstract=&quot;false&quot; isFinalSpecialization=&quot;false&quot; isLeaf=&quot;false&quot; xmi:type=&quot;uml:UseCase&quot;/&gt;
+			&lt;packagedElement xmi:id=&quot;AAAAAAFgF1Ogmmt70Hk=&quot; name=&quot;Open existing project&quot; visibility=&quot;public&quot; isAbstract=&quot;false&quot; isFinalSpecialization=&quot;false&quot; isLeaf=&quot;false&quot; xmi:type=&quot;uml:UseCase&quot;&gt;
+				&lt;include xmi:id=&quot;AAAAAAFgF1RMzmyvAL0=&quot; visibility=&quot;public&quot; xmi:type=&quot;uml:Include&quot; addition=&quot;AAAAAAFgF1Nu7GtMOTU=&quot; includingCase=&quot;AAAAAAFgF1Ogmmt70Hk=&quot;/&gt;
+			&lt;/packagedElement&gt;
+		&lt;/packagedElement&gt;
+	&lt;/uml:Model&gt;
+&lt;/xmi:XMI&gt;</string>
+    </void>
+   </void>
+   <void class="ranalyzer.RequirementDocument" method="getField">
+    <string>ucd</string>
+    <void method="set">
+     <object idref="RequirementDocument0"/>
+     <object idref="UseCaseDiagram0"/>
+    </void>
+   </void>
+  </object>
+  <string>01</string>
+ </void>
+</void>
+<void class="ranalyzer.Relation" method="getField">
+ <string>idSrc</string>
+ <void method="set">
+  <object class="ranalyzer.Relation" id="Relation1">
+   <void class="ranalyzer.Relation" method="getField">
+    <string>idDestination</string>
+    <void method="set">
+     <object idref="Relation1"/>
+     <string>Open existing project</string>
+    </void>
+   </void>
+   <void class="ranalyzer.Relation" method="getField">
+    <string>relation</string>
+    <void method="set">
+     <object idref="Relation1"/>
+     <string>association</string>
+    </void>
+   </void>
+  </object>
+  <string>ReqEngineer</string>
+ </void>
+</void>
+<void class="ranalyzer.UseCaseDiagram" id="Field1" method="getField">
+ <string>relationList</string>
+ <void id="ArrayList1" method="get">
+  <object idref="UseCaseDiagram0"/>
+  <void method="add">
+   <object idref="Relation1"/>
+  </void>
+  <void method="add">
+   <object class="ranalyzer.Relation" id="Relation2">
+    <void class="ranalyzer.Relation" method="getField">
+     <string>idSrc</string>
+     <void method="set">
+      <object idref="Relation2"/>
+      <string>Create new Project</string>
+     </void>
+    </void>
+    <void class="ranalyzer.Relation" method="getField">
+     <string>idDestination</string>
+     <void method="set">
+      <object idref="Relation2"/>
+      <string>Show project worksheet</string>
+     </void>
+    </void>
+    <void class="ranalyzer.Relation" method="getField">
+     <string>relation</string>
+     <void method="set">
+      <object idref="Relation2"/>
+      <string>includes</string>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="ranalyzer.Relation" id="Relation3">
+    <void class="ranalyzer.Relation" method="getField">
+     <string>idSrc</string>
+     <void method="set">
+      <object idref="Relation3"/>
+      <string>Open existing project</string>
+     </void>
+    </void>
+    <void class="ranalyzer.Relation" method="getField">
+     <string>idDestination</string>
+     <void method="set">
+      <object idref="Relation3"/>
+      <string>Show project worksheet</string>
+     </void>
+    </void>
+    <void class="ranalyzer.Relation" method="getField">
+     <string>relation</string>
+     <void method="set">
+      <object idref="Relation3"/>
+      <string>includes</string>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object idref="Relation0"/>
+  </void>
+ </void>
+</void>
+<void idref="ArrayList1"/>
+<void class="ranalyzer.Project" id="Field2" method="getField">
+ <string>docList</string>
+ <void id="ArrayList2" method="get">
+  <object idref="Project0"/>
+  <void method="add">
+   <object idref="RequirementDocument0"/>
+  </void>
+ </void>
+</void>
+<void idref="ArrayList2"/>
+</java>
